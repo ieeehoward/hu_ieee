@@ -1,0 +1,64 @@
+import { Carousel, CarouselItem } from "@/components/ui/carousel"
+import { Card, CardContent } from "@/components/ui/card"
+import { Quote } from "lucide-react"
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Alex Johnson",
+    role: "Computer Engineering Senior",
+    content:
+      "IEEE Howard has been instrumental in my growth as an engineer. The hands-on workshops and networking opportunities have opened doors I never imagined possible.",
+    year: "Class of 2024",
+  },
+  {
+    id: 2,
+    name: "Maya Patel",
+    role: "Electrical Engineering Junior",
+    content:
+      "The machine learning workshop series completely changed my career trajectory. I'm now pursuing an internship at a top tech company thanks to the skills I learned here.",
+    year: "Class of 2025",
+  },
+  {
+    id: 3,
+    name: "Jordan Williams",
+    role: "IEEE Alumni",
+    content:
+      "My experience with IEEE Howard prepared me for the real world. The technical skills and leadership experience I gained are invaluable in my current role as a software engineer.",
+    year: "Class of 2023",
+  },
+  {
+    id: 4,
+    name: "Samantha Chen",
+    role: "Computer Science Sophomore",
+    content:
+      "As a sophomore, I was intimidated by advanced topics, but the supportive IEEE community made learning embedded systems approachable and fun. Now I'm leading my own projects!",
+    year: "Class of 2026",
+  },
+]
+
+export function TestimonialCarousel() {
+  return (
+    <div className="w-full">
+      <Carousel autoPlay autoPlayInterval={7000} className="w-full">
+        {testimonials.map((testimonial) => (
+          <CarouselItem key={testimonial.id}>
+            <Card className="bg-gray-900 border-gray-800">
+              <CardContent className="p-8 text-center">
+                <Quote className="w-12 h-12 text-primary mx-auto mb-6 opacity-50" />
+                <blockquote className="text-lg text-gray-300 leading-relaxed mb-6 max-w-3xl mx-auto">
+                  "{testimonial.content}"
+                </blockquote>
+                <div className="space-y-1">
+                  <h4 className="text-white font-semibold text-lg">{testimonial.name}</h4>
+                  <p className="text-primary font-medium">{testimonial.role}</p>
+                  <p className="text-gray-400 text-sm">{testimonial.year}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </CarouselItem>
+        ))}
+      </Carousel>
+    </div>
+  )
+}

@@ -1,0 +1,30 @@
+import { Carousel, CarouselItem } from "@/components/ui/carousel"
+import { Card, CardContent } from "@/components/ui/card"
+import { teamMembers } from "@/constants/data"
+import Image from "next/image"
+
+export function TeamCarousel() {
+  return (
+    <div className="w-full">
+      <Carousel autoPlay autoPlayInterval={4000} className="w-full">
+        {teamMembers.map((member) => (
+          <CarouselItem key={member.id}>
+            <Card className="bg-gray-900 border-gray-800 overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+                <div className="relative h-64 md:h-80">
+                  <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-black/20" />
+                </div>
+                <CardContent className="md:col-span-2 p-8 flex flex-col justify-center">
+                  <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
+                  <p className="text-primary font-semibold mb-4 text-lg">{member.role}</p>
+                  <p className="text-gray-300 leading-relaxed">{member.bio}</p>
+                </CardContent>
+              </div>
+            </Card>
+          </CarouselItem>
+        ))}
+      </Carousel>
+    </div>
+  )
+}
