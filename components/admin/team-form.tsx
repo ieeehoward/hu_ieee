@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { X, Save } from "lucide-react"
-import type { TeamMember } from "@/constants/data"
+import type { TeamMember } from "@/types"
 
 interface TeamFormProps {
   member?: TeamMember

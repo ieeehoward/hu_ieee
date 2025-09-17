@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { X, Save } from "lucide-react"
-import type { Course } from "@/constants/data"
+import type { Course } from "@/types"
 
 interface CourseFormProps {
   course?: Course

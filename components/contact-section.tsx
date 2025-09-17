@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, MapPin, Clock } from "lucide-react"
-import { externalLinks } from "@/constants/data"
+import { externalLinks } from "@/constants/static"
 import Image from "next/image"
 
 export function ContactSection() {

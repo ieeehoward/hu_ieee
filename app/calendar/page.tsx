@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { externalLinks } from "@/constants/data"
+import { externalLinks } from "@/constants/static"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ExternalLink, Plus } from "lucide-react"
 

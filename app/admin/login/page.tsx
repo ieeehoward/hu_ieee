@@ -5,7 +5,8 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Cpu, Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -68,8 +69,14 @@ export default function AdminLogin() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
-            <Cpu className="h-8 w-8 mr-2" />
-            <span className="text-2xl font-bold">Ibalilam</span>
+            <Image 
+              src="/ieee-logo.png" 
+              alt="IEEE Logo" 
+              width={50} 
+              height={50} 
+              className="mr-2"
+            />
+            <span className="text-2xl font-bold">IEEE HU</span>
           </div>
           <CardTitle className="text-2xl text-center">Sign in to your account</CardTitle>
           <CardDescription className="text-center">

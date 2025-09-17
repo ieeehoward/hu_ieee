@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { X, Save, Plus } from "lucide-react"
-import type { Project } from "@/constants/data"
+import type { Project } from "@/types"
 
 interface ProjectFormProps {
   project?: Project

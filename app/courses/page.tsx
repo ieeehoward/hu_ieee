@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { courses, projects } from "@/constants/data"
+import { courseServiceServer } from "@/lib/database-server"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Calendar, BookOpen, Clock, Users, GraduationCap } from "lucide-react"
 import { CourseInstructorsCarousel } from "@/components/course-instructors-carousel"
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  const courses = await courseServiceServer.getAll()
   const currentCourses = courses.filter((course) => course.status === "current")
   const pastCourses = courses.filter((course) => course.status === "past")
   

@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -21,23 +22,52 @@ import {
   Trash2,
   Eye
 } from "lucide-react"
-import { courses, teamMembers, projects, instructors } from "@/constants/data"
-import type { Course, TeamMember, Project, Instructor } from "@/constants/data"
+import type { Course, TeamMember, Project, Instructor } from "@/types"
 import { ProtectedRoute } from "@/components/admin/protected-route"
 import { CourseForm } from "@/components/admin/course-form"
 import { TeamForm } from "@/components/admin/team-form"
 import { ProjectForm } from "@/components/admin/project-form"
 import { InstructorForm } from "@/components/admin/instructor-form"
-import { createClient } from "@/utils/supabase/client"
+import { courseService, teamMemberService, projectService, instructorService } from "@/lib/database"
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
   const [showForm, setShowForm] = useState(false)
   const [formType, setFormType] = useState<"course" | "team" | "project" | "instructor" | null>(null)
   const [editingItem, setEditingItem] = useState<any>(null)
+  const [courses, setCourses] = useState<Course[]>([])
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
+  const [instructors, setInstructors] = useState<Instructor[]>([])
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const { signOut } = useAuth()
-  const supabase = createClient()
+
+  // Fetch data from database
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const [coursesData, teamData, projectsData, instructorsData] = await Promise.all([
+          courseService.getAll(),
+          teamMemberService.getAll(),
+          projectService.getAll(),
+          instructorService.getAll()
+        ])
+        
+        setCourses(coursesData)
+        setTeamMembers(teamData)
+        setProjects(projectsData)
+        setInstructors(instructorsData)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const handleLogout = async () => {
     try {
@@ -63,19 +93,113 @@ export default function AdminDashboard() {
     setShowForm(true)
   }
 
-  const handleSave = (item: any) => {
-    // In a real app, this would save to a database
-    console.log("Saving item:", item)
+  const handleSave = async (item: any) => {
+    try {
+      let result
+      if (editingItem) {
+        // Update existing item
+        if (formType === "course") {
+          result = await courseService.update(editingItem.id, item)
+          if (result) {
+            setCourses(courses.map(c => c.id === editingItem.id ? result! : c))
+          }
+        } else if (formType === "team") {
+          result = await teamMemberService.update(editingItem.id, item)
+          if (result) {
+            setTeamMembers(teamMembers.map(m => m.id === editingItem.id ? result! : m))
+          }
+        } else if (formType === "project") {
+          result = await projectService.update(editingItem.id, item)
+          if (result) {
+            setProjects(projects.map(p => p.id === editingItem.id ? result! : p))
+          }
+        } else if (formType === "instructor") {
+          result = await instructorService.update(editingItem.id, item)
+          if (result) {
+            setInstructors(instructors.map(i => i.id === editingItem.id ? result! : i))
+          }
+        }
+      } else {
+        // Create new item
+        if (formType === "course") {
+          result = await courseService.create(item)
+          if (result) {
+            setCourses([result, ...courses])
+          }
+        } else if (formType === "team") {
+          result = await teamMemberService.create(item)
+          if (result) {
+            setTeamMembers([result, ...teamMembers])
+          }
+        } else if (formType === "project") {
+          result = await projectService.create(item)
+          if (result) {
+            setProjects([result, ...projects])
+          }
+        } else if (formType === "instructor") {
+          result = await instructorService.create(item)
+          if (result) {
+            setInstructors([result, ...instructors])
+          }
+        }
+      }
+      
+      if (result) {
+        console.log("Item saved successfully:", result)
+        // You could add a toast notification here
+      } else {
+        console.error("Failed to save item")
+      }
+    } catch (error) {
+      console.error("Error saving item:", error)
+    }
+    
     setShowForm(false)
     setFormType(null)
     setEditingItem(null)
-    // You could add a toast notification here
   }
 
   const handleCancel = () => {
     setShowForm(false)
     setFormType(null)
     setEditingItem(null)
+  }
+
+  const handleDelete = async (type: "course" | "team" | "project" | "instructor", id: string) => {
+    try {
+      let success = false
+      
+      if (type === "course") {
+        success = await courseService.delete(id)
+        if (success) {
+          setCourses(courses.filter(c => c.id !== id))
+        }
+      } else if (type === "team") {
+        success = await teamMemberService.delete(id)
+        if (success) {
+          setTeamMembers(teamMembers.filter(m => m.id !== id))
+        }
+      } else if (type === "project") {
+        success = await projectService.delete(id)
+        if (success) {
+          setProjects(projects.filter(p => p.id !== id))
+        }
+      } else if (type === "instructor") {
+        success = await instructorService.delete(id)
+        if (success) {
+          setInstructors(instructors.filter(i => i.id !== id))
+        }
+      }
+      
+      if (success) {
+        console.log("Item deleted successfully")
+        // You could add a toast notification here
+      } else {
+        console.error("Failed to delete item")
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error)
+    }
   }
 
   return (
@@ -86,9 +210,13 @@ export default function AdminDashboard() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
                 <div className="flex items-center">
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg mr-3">
-                  <Settings className="h-6 w-6 text-white" />
-                </div>
+                <Image 
+                  src="/ieee-logo.png" 
+                  alt="IEEE Logo" 
+                  width={50} 
+                  height={50} 
+                  className="mr-3"
+                />
                 <h1 className="text-xl font-semibold text-gray-800">Admin Portal</h1>
                 </div>
                 <AlertDialog>
@@ -118,6 +246,15 @@ export default function AdminDashboard() {
         </header>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {loading ? (
+                <div className="flex items-center justify-center h-64">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                        <p className="text-gray-600">Loading data...</p>
+                    </div>
+                </div>
+            ) : (
+            <>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
             <TabsList className="grid w-full grid-cols-5 bg-white/60 backdrop-blur-sm border border-gray-200">
                 <TabsTrigger value="overview" className="data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700">Overview</TabsTrigger>
@@ -277,9 +414,30 @@ export default function AdminDashboard() {
                              <Button size="sm" variant="outline" className="hover:bg-gray-50 hover:border-gray-200">
                              <Eye className="h-4 w-4" />
                              </Button>
-                             <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
-                             <Trash2 className="h-4 w-4" />
-                             </Button>
+                             <AlertDialog>
+                               <AlertDialogTrigger asChild>
+                                 <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+                                   <Trash2 className="h-4 w-4" />
+                                 </Button>
+                               </AlertDialogTrigger>
+                               <AlertDialogContent>
+                                 <AlertDialogHeader>
+                                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                   <AlertDialogDescription>
+                                     This action cannot be undone. This will permanently delete the course "{course.title}".
+                                   </AlertDialogDescription>
+                                 </AlertDialogHeader>
+                                 <AlertDialogFooter>
+                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                   <AlertDialogAction 
+                                     onClick={() => handleDelete("course", course.id)}
+                                     className="bg-red-600 hover:bg-red-700"
+                                   >
+                                     Delete
+                                   </AlertDialogAction>
+                                 </AlertDialogFooter>
+                               </AlertDialogContent>
+                             </AlertDialog>
                          </div>
                          </div>
                      </CardContent>
@@ -317,9 +475,30 @@ export default function AdminDashboard() {
                              <Button size="sm" variant="outline" onClick={() => handleEdit("team", member)} className="hover:bg-blue-50 hover:border-blue-200">
                              <Edit className="h-4 w-4" />
                              </Button>
-                             <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
-                             <Trash2 className="h-4 w-4" />
-                             </Button>
+                             <AlertDialog>
+                               <AlertDialogTrigger asChild>
+                                 <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+                                   <Trash2 className="h-4 w-4" />
+                                 </Button>
+                               </AlertDialogTrigger>
+                               <AlertDialogContent>
+                                 <AlertDialogHeader>
+                                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                   <AlertDialogDescription>
+                                     This action cannot be undone. This will permanently delete team member "{member.name}".
+                                   </AlertDialogDescription>
+                                 </AlertDialogHeader>
+                                 <AlertDialogFooter>
+                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                   <AlertDialogAction 
+                                     onClick={() => handleDelete("team", member.id)}
+                                     className="bg-red-600 hover:bg-red-700"
+                                   >
+                                     Delete
+                                   </AlertDialogAction>
+                                 </AlertDialogFooter>
+                               </AlertDialogContent>
+                             </AlertDialog>
                          </div>
                          </div>
                      </CardContent>
@@ -355,9 +534,30 @@ export default function AdminDashboard() {
                              <Button size="sm" variant="outline" onClick={() => handleEdit("project", project)} className="hover:bg-blue-50 hover:border-blue-200">
                              <Edit className="h-4 w-4" />
                              </Button>
-                             <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
-                             <Trash2 className="h-4 w-4" />
-                             </Button>
+                             <AlertDialog>
+                               <AlertDialogTrigger asChild>
+                                 <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+                                   <Trash2 className="h-4 w-4" />
+                                 </Button>
+                               </AlertDialogTrigger>
+                               <AlertDialogContent>
+                                 <AlertDialogHeader>
+                                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                   <AlertDialogDescription>
+                                     This action cannot be undone. This will permanently delete the project "{project.title}".
+                                   </AlertDialogDescription>
+                                 </AlertDialogHeader>
+                                 <AlertDialogFooter>
+                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                   <AlertDialogAction 
+                                     onClick={() => handleDelete("project", project.id)}
+                                     className="bg-red-600 hover:bg-red-700"
+                                   >
+                                     Delete
+                                   </AlertDialogAction>
+                                 </AlertDialogFooter>
+                               </AlertDialogContent>
+                             </AlertDialog>
                          </div>
                          </div>
                      </CardContent>
@@ -402,9 +602,30 @@ export default function AdminDashboard() {
                              <Button size="sm" variant="outline" onClick={() => handleEdit("instructor", instructor)} className="hover:bg-blue-50 hover:border-blue-200">
                              <Edit className="h-4 w-4" />
                              </Button>
-                             <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
-                             <Trash2 className="h-4 w-4" />
-                             </Button>
+                             <AlertDialog>
+                               <AlertDialogTrigger asChild>
+                                 <Button size="sm" variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+                                   <Trash2 className="h-4 w-4" />
+                                 </Button>
+                               </AlertDialogTrigger>
+                               <AlertDialogContent>
+                                 <AlertDialogHeader>
+                                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                   <AlertDialogDescription>
+                                     This action cannot be undone. This will permanently delete instructor "{instructor.name}".
+                                   </AlertDialogDescription>
+                                 </AlertDialogHeader>
+                                 <AlertDialogFooter>
+                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                   <AlertDialogAction 
+                                     onClick={() => handleDelete("instructor", instructor.id)}
+                                     className="bg-red-600 hover:bg-red-700"
+                                   >
+                                     Delete
+                                   </AlertDialogAction>
+                                 </AlertDialogFooter>
+                               </AlertDialogContent>
+                             </AlertDialog>
                          </div>
                          </div>
                      </CardContent>
@@ -455,6 +676,8 @@ export default function AdminDashboard() {
                 )}
             </DialogContent>
             </Dialog>
+            </>
+            )}
         </div>
       </div>
     </ProtectedRoute>

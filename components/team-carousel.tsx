@@ -1,9 +1,10 @@
 import { Carousel, CarouselItem } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
-import { teamMembers } from "@/constants/data"
+import { teamMemberServiceServer } from "@/lib/database-server"
 import Image from "next/image"
 
-export function TeamCarousel() {
+export async function TeamCarousel() {
+  const teamMembers = await teamMemberServiceServer.getAll()
   return (
     <div className="w-full" style={{ contain: "layout style paint" }}>
       <Carousel autoPlay autoPlayInterval={4000} className="w-full">

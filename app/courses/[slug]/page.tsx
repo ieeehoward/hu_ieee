@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { courses } from "@/constants/data"
+import { courseServiceServer } from "@/lib/database-server"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -13,8 +13,8 @@ interface CoursePageProps {
   }
 }
 
-export default function CoursePage({ params }: CoursePageProps) {
-  const course = courses.find((c) => c.slug === params.slug)
+export default async function CoursePage({ params }: CoursePageProps) {
+  const course = await courseServiceServer.getBySlug(params.slug)
 
   if (!course) {
     notFound()
@@ -272,6 +272,7 @@ export default function CoursePage({ params }: CoursePageProps) {
 
 // Generate static params for all courses
 export async function generateStaticParams() {
+  const courses = await courseServiceServer.getAll()
   return courses.map((course) => ({
     slug: course.slug,
   }))
@@ -279,7 +280,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for each course
 export async function generateMetadata({ params }: CoursePageProps) {
-  const course = courses.find((c) => c.slug === params.slug)
+  const course = await courseServiceServer.getBySlug(params.slug)
 
   if (!course) {
     return {

@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { courses } from "@/constants/data"
+import { courseServiceServer } from "@/lib/database-server"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Calendar, BookOpen } from "lucide-react"
 
-export function CoursesPreview() {
+export async function CoursesPreview() {
+  const courses = await courseServiceServer.getAll()
   const currentCourses = courses.filter((course) => course.status === "current")
   const pastCourses = courses.filter((course) => course.status === "past").slice(0, 2)
 
