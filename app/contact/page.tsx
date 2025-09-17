@@ -9,7 +9,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  Phone,
   Instagram,
   Linkedin,
   ExternalLink,
@@ -18,6 +17,7 @@ import {
   Users,
   Calendar,
 } from "lucide-react"
+import Image from "next/image"
 
 const iconMap = {
   instagram: Instagram,
@@ -31,30 +31,16 @@ const contactMethods = [
     icon: Mail,
     title: "Email Us",
     description: "Get in touch for any inquiries or questions",
-    contact: "ieee@howard.edu",
-    action: "mailto:ieee@howard.edu",
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    description: "Speak directly with our team",
-    contact: "(202) 806-6565",
-    action: "tel:+12028066565",
+    contact: "ieeehowardbison@gmail.com",
+    action: "mailto:ieeehowardbison@gmail.com",
   },
   {
     icon: MapPin,
     title: "Visit Us",
     description: "Find us on the Howard University campus",
-    contact: "School of Engineering, Washington, DC",
-    action: "https://maps.google.com/placeholder",
-  },
-  {
-    icon: Clock,
-    title: "Office Hours",
-    description: "When we're available to meet",
-    contact: "Mon-Fri, 2:00 PM - 6:00 PM",
-    action: "/calendar",
-  },
+    contact: "College of Architecture and Engineering, Washington, DC",
+    action: "https://share.google/AoGWHRD38lmKDHIZ3",
+  }
 ]
 
 const quickActions = [
@@ -62,14 +48,14 @@ const quickActions = [
     icon: MessageCircle,
     title: "Join GroupMe",
     description: "Connect with our community chat",
-    action: "https://groupme.com/join_group/placeholder",
+    action: "https://groupme.com/join_group/96131081/uo3DOddE",
     color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   },
   {
     icon: Users,
     title: "Become a Member",
     description: "Sign up for official membership",
-    action: "https://forms.google.com/placeholder",
+    action: "https://forms.gle/xymBWBfqJHvPH6vP8",
     color: "bg-green-500/20 text-green-400 border-green-500/30",
   },
   {
@@ -108,7 +94,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {contactMethods.map((method, index) => (
               <Card key={index} className="bg-black/40 border-gray-800 hover:border-primary/50 transition-colors group">
                 <CardContent className="p-6 text-center">
@@ -288,7 +274,7 @@ export default function ContactPage() {
                     members are active throughout the day.
                   </p>
                   <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                    <Link href="https://groupme.com/join_group/placeholder" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://groupme.com/join_group/96131081/uo3DOddE" target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Join GroupMe
                     </Link>
@@ -316,7 +302,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="text-white font-semibold mb-2">Howard University</h4>
                     <p className="text-gray-300">
-                      School of Engineering and Architecture
+                      College of Architecture and Engineering
                       <br />
                       2366 Sixth Street NW
                       <br />
@@ -328,7 +314,7 @@ export default function ContactPage() {
                     variant="outline"
                     className="border-gray-600 text-white hover:bg-gray-800 bg-transparent"
                   >
-                    <Link href="https://maps.google.com/placeholder" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://share.google/AoGWHRD38lmKDHIZ3" target="_blank" rel="noopener noreferrer">
                       <MapPin className="w-4 h-4 mr-2" />
                       Get Directions
                     </Link>
@@ -349,7 +335,7 @@ export default function ContactPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-300">Monday - Friday</span>
-                      <span className="text-white">2:00 PM - 6:00 PM</span>
+                      <span className="text-white">10:00 AM - 6:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-300">Saturday</span>
@@ -375,9 +361,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-                <span className="text-white font-bold text-sm">IEEE</span>
-              </div>
+              <Image src="/ieee-logo.png" alt="IEEE Logo" width={32} height={32} />
               <span className="text-white font-semibold">Howard University IEEE Student Branch</span>
             </div>
             <p className="text-gray-400">© {currentYear} Howard University IEEE Student Branch. All rights reserved.</p>

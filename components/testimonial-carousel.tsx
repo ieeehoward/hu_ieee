@@ -5,35 +5,11 @@ import { Quote } from "lucide-react"
 const testimonials = [
   {
     id: 1,
-    name: "Alex Johnson",
-    role: "Computer Engineering Senior",
-    content:
-      "IEEE Howard has been instrumental in my growth as an engineer. The hands-on workshops and networking opportunities have opened doors I never imagined possible.",
-    year: "Class of 2024",
-  },
-  {
-    id: 2,
-    name: "Maya Patel",
+    name: "John Doe",
     role: "Electrical Engineering Junior",
     content:
       "The machine learning workshop series completely changed my career trajectory. I'm now pursuing an internship at a top tech company thanks to the skills I learned here.",
     year: "Class of 2025",
-  },
-  {
-    id: 3,
-    name: "Jordan Williams",
-    role: "IEEE Alumni",
-    content:
-      "My experience with IEEE Howard prepared me for the real world. The technical skills and leadership experience I gained are invaluable in my current role as a software engineer.",
-    year: "Class of 2023",
-  },
-  {
-    id: 4,
-    name: "Samantha Chen",
-    role: "Computer Science Sophomore",
-    content:
-      "As a sophomore, I was intimidated by advanced topics, but the supportive IEEE community made learning embedded systems approachable and fun. Now I'm leading my own projects!",
-    year: "Class of 2026",
   },
 ]
 

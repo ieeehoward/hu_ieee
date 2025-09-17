@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -31,10 +32,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-sm">IEEE</span>
-            </div>
-            <span className="font-bold text-lg text-foreground">Howard University</span>
+            <Image src="/ieee-logo.png" alt="IEEE Logo" width={80} height={80} />
           </Link>
 
           {/* Desktop Navigation */}

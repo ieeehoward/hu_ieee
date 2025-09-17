@@ -114,42 +114,6 @@ export default function AboutPage() {
           <TestimonialCarousel />
         </div>
       </section>
-
-      {/* History & Achievements */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">Our Journey</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              From our founding to today, we've consistently pushed the boundaries of what's possible in engineering
-              education and student engagement.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-black/40 border-gray-800 text-center hover:border-primary/50 transition-colors">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-primary mb-2">500+</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Students Reached</h3>
-                <p className="text-gray-400">Through workshops, events, and programs</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/40 border-gray-800 text-center hover:border-primary/50 transition-colors">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-primary mb-2">50+</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Technical Workshops</h3>
-                <p className="text-gray-400">Covering cutting-edge technologies</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/40 border-gray-800 text-center hover:border-primary/50 transition-colors">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-primary mb-2">25+</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Industry Partners</h3>
-                <p className="text-gray-400">Collaborating on real-world projects</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
     </main>
   )
 }
