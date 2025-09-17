@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
-import type { Course, TeamMember, Project, Instructor } from '@/types'
+import type { Course, TeamMember, Project, Instructor, CourseDetails } from '@/types'
 
 // Courses CRUD operations (server-side)
 export const courseServiceServer = {
@@ -52,6 +52,46 @@ export const courseServiceServer = {
       return null
     }
     return data
+  }
+}
+
+// Course Details CRUD operations (server-side)
+export const courseDetailsServiceServer = {
+  async getByCourseId(courseId: string): Promise<CourseDetails | null> {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+    
+    const { data, error } = await supabase
+      .from('course_details')
+      .select('*')
+      .eq('course_id', courseId)
+      .single()
+    
+    if (error) {
+      console.error('Error fetching course details:', error)
+      return null
+    }
+    return data
+  },
+
+  async getByCourseSlug(slug: string): Promise<CourseDetails | null> {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+    
+    // First get the course by slug
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('id')
+      .eq('slug', slug)
+      .single()
+    
+    if (courseError || !course) {
+      console.error('Error fetching course by slug:', courseError)
+      return null
+    }
+
+    // Then get the course details
+    return this.getByCourseId(course.id)
   }
 }
 

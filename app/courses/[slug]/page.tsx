@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { courseServiceServer } from "@/lib/database-server"
+import { courseServiceServer, courseDetailsServiceServer } from "@/lib/database-server"
 import { buildTimeDatabase } from "@/lib/database-build"
 import Image from "next/image"
 import Link from "next/link"
@@ -21,59 +21,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
     notFound()
   }
 
-  // Mock additional course data that would typically come from a CMS or database
-  const courseDetails = {
-    duration: "12 weeks",
-    level: "Intermediate",
-    instructor: "Dr. Sarah Johnson",
-    enrolled: 28,
-    maxCapacity: 30,
-    prerequisites: ["Basic programming knowledge", "Familiarity with electronics (recommended)"],
-    learningObjectives: [
-      "Understand fundamental concepts of embedded systems architecture",
-      "Program microcontrollers using C/C++ and Arduino IDE",
-      "Design and implement sensor-based projects",
-      "Debug and troubleshoot embedded systems",
-      "Apply best practices for embedded software development",
-    ],
-    syllabus: [
-      {
-        week: 1,
-        topic: "Introduction to Embedded Systems",
-        description: "Overview of embedded systems, microcontrollers vs microprocessors",
-      },
-      {
-        week: 2,
-        topic: "Arduino Fundamentals",
-        description: "Arduino IDE, basic programming, digital I/O",
-      },
-      {
-        week: 3,
-        topic: "Analog Input/Output",
-        description: "ADC, PWM, sensor interfacing",
-      },
-      {
-        week: 4,
-        topic: "Communication Protocols",
-        description: "UART, SPI, I2C communication",
-      },
-      {
-        week: 5,
-        topic: "Interrupts and Timers",
-        description: "Hardware interrupts, timer configurations",
-      },
-      {
-        week: 6,
-        topic: "Project Development",
-        description: "Hands-on project work and implementation",
-      },
-    ],
-    resources: [
-      "Arduino Uno R3 Kit (provided)",
-      "Online course materials and videos",
-      "Weekly lab sessions",
-      "Project starter code repository",
-    ],
+  // Get course details from database
+  const courseDetails = await courseDetailsServiceServer.getByCourseSlug(params.slug)
+
+  if (!courseDetails) {
+    notFound()
   }
 
   return (
@@ -108,7 +60,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <div className="flex items-center text-muted-foreground">
                   <Clock className="w-5 h-5 text-primary mr-2" />
-                  <span className="text-sm">{courseDetails.duration}</span>
+                  <span className="text-sm">{course.duration}</span>
                 </div>
                 <div className="flex items-center text-muted-foreground">
                   <BookOpen className="w-5 h-5 text-primary mr-2" />
@@ -117,12 +69,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 <div className="flex items-center text-muted-foreground">
                   <Users className="w-5 h-5 text-primary mr-2" />
                   <span className="text-sm">
-                    {courseDetails.enrolled}/{courseDetails.maxCapacity}
+                    {course.enrolled}/{courseDetails.max_capacity}
                   </span>
                 </div>
                 <div className="flex items-center text-muted-foreground">
                   <User className="w-5 h-5 text-primary mr-2" />
-                  <span className="text-sm">Dr. Johnson</span>
+                  <span className="text-sm">{courseDetails.instructor}</span>
                 </div>
               </div>
 
@@ -159,7 +111,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {courseDetails.learningObjectives.map((objective, index) => (
+                    {courseDetails.learning_objectives.map((objective, index) => (
                       <li key={index} className="flex items-start text-muted-foreground">
                         <CheckCircle className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                         <span>{objective}</span>
@@ -243,12 +195,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
                     </div>
                     <div>
                       <h4 className="text-foreground font-semibold">{courseDetails.instructor}</h4>
-                      <p className="text-muted-foreground text-sm">Faculty Advisor</p>
+                      <p className="text-muted-foreground text-sm">Chair</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground text-sm">
-                    Professor of Electrical Engineering with expertise in embedded systems and IoT applications.
-                  </p>
                 </CardContent>
               </Card>
 

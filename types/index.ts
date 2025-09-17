@@ -13,6 +13,26 @@ export interface Course {
   updated_at?: string
 }
 
+export interface SyllabusItem {
+  week: number
+  topic: string
+  description: string
+}
+
+export interface CourseDetails {
+  id: string
+  course_id: string
+  level: string
+  instructor: string
+  max_capacity: number
+  prerequisites: string[]
+  learning_objectives: string[]
+  syllabus: SyllabusItem[]
+  resources: string[]
+  created_at?: string
+  updated_at?: string
+}
+
 export interface TeamMember {
   id: string
   name: string

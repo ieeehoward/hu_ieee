@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Course, TeamMember, Project, Instructor } from '@/types'
+import type { Course, TeamMember, Project, Instructor, CourseDetails } from '@/types'
 
 // Build-time database client (no cookies needed)
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -73,5 +73,32 @@ export const buildTimeDatabase = {
       return []
     }
     return data || []
+  },
+
+  async getCourseDetailsBySlug(slug: string): Promise<CourseDetails | null> {
+    // First get the course by slug
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('id')
+      .eq('slug', slug)
+      .single()
+    
+    if (courseError || !course) {
+      console.error('Error fetching course by slug for build:', courseError)
+      return null
+    }
+
+    // Then get the course details
+    const { data, error } = await supabase
+      .from('course_details')
+      .select('*')
+      .eq('course_id', course.id)
+      .single()
+    
+    if (error) {
+      console.error('Error fetching course details for build:', error)
+      return null
+    }
+    return data
   }
 }

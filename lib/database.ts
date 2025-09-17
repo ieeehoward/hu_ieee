@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/client'
-import type { Course, TeamMember, Project, Instructor } from '@/types'
+import type { Course, TeamMember, Project, Instructor, CourseDetails } from '@/types'
 
 const supabase = createClient()
 
@@ -69,6 +69,82 @@ export const courseService = {
     
     if (error) {
       console.error('Error deleting course:', error)
+      return false
+    }
+    return true
+  }
+}
+
+// Course Details CRUD operations
+export const courseDetailsService = {
+  async getByCourseId(courseId: string): Promise<CourseDetails | null> {
+    const { data, error } = await supabase
+      .from('course_details')
+      .select('*')
+      .eq('course_id', courseId)
+      .single()
+    
+    if (error) {
+      console.error('Error fetching course details:', error)
+      return null
+    }
+    return data
+  },
+
+  async getByCourseSlug(slug: string): Promise<CourseDetails | null> {
+    // First get the course by slug
+    const { data: course, error: courseError } = await supabase
+      .from('courses')
+      .select('id')
+      .eq('slug', slug)
+      .single()
+    
+    if (courseError || !course) {
+      console.error('Error fetching course by slug:', courseError)
+      return null
+    }
+
+    // Then get the course details
+    return this.getByCourseId(course.id)
+  },
+
+  async create(courseDetails: Omit<CourseDetails, 'id'>): Promise<CourseDetails | null> {
+    const { data, error } = await supabase
+      .from('course_details')
+      .insert(courseDetails)
+      .select()
+      .single()
+    
+    if (error) {
+      console.error('Error creating course details:', error)
+      return null
+    }
+    return data
+  },
+
+  async update(courseId: string, updates: Partial<Omit<CourseDetails, 'id' | 'course_id'>>): Promise<CourseDetails | null> {
+    const { data, error } = await supabase
+      .from('course_details')
+      .update(updates)
+      .eq('course_id', courseId)
+      .select()
+      .single()
+    
+    if (error) {
+      console.error('Error updating course details:', error)
+      return null
+    }
+    return data
+  },
+
+  async delete(courseId: string): Promise<boolean> {
+    const { error } = await supabase
+      .from('course_details')
+      .delete()
+      .eq('course_id', courseId)
+    
+    if (error) {
+      console.error('Error deleting course details:', error)
       return false
     }
     return true
