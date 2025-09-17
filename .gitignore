@@ -19,6 +19,12 @@ yarn-error.log*
 # env files
 .env*
 
+# admin stuff
+scripts/create-admin-user.js
+ADMIN_SETUP.md
+
+
+
 # vercel
 .vercel
 

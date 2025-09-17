@@ -2,11 +2,13 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/hooks/use-auth"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { 
   Users, 
   BookOpen, 
@@ -26,6 +28,7 @@ import { CourseForm } from "@/components/admin/course-form"
 import { TeamForm } from "@/components/admin/team-form"
 import { ProjectForm } from "@/components/admin/project-form"
 import { InstructorForm } from "@/components/admin/instructor-form"
+import { createClient } from "@/utils/supabase/client"
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -33,9 +36,18 @@ export default function AdminDashboard() {
   const [formType, setFormType] = useState<"course" | "team" | "project" | "instructor" | null>(null)
   const [editingItem, setEditingItem] = useState<any>(null)
   const router = useRouter()
+  const { signOut } = useAuth()
+  const supabase = createClient()
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuth")
+  const handleLogout = async () => {
+    try {
+        const error = await signOut()
+        if (error) {
+            console.error("Logout failed:", error)
+        }
+    } catch (error) {
+      console.error("Logout failed:", error)
+    }
     router.push("/admin/login")
   }
 
@@ -68,7 +80,7 @@ export default function AdminDashboard() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div>
         {/* Header */}
         <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,10 +91,28 @@ export default function AdminDashboard() {
                 </div>
                 <h1 className="text-xl font-semibold text-gray-800">Admin Portal</h1>
                 </div>
-                <Button variant="outline" onClick={handleLogout} className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
-                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="outline" className="hover:bg-red-50 hover:border-red-200 hover:text-red-600">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        You will be signed out of the admin portal and redirected to the login page.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleLogout} className="bg-red-600 hover:bg-red-700">
+                        Logout
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
             </div>
             </div>
         </header>
