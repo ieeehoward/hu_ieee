@@ -49,13 +49,14 @@ export function Carousel({
   return (
     <div
       className={cn("relative overflow-hidden rounded-lg", className)}
+      style={{ contain: "layout style paint" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Carousel Content */}
       <div
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        className="flex transition-transform duration-500 ease-in-out will-change-transform"
+        style={{ transform: `translate3d(-${currentIndex * 100}%, 0, 0)` }}
       >
         {children.map((child, index) => (
           <div key={index} className="w-full flex-shrink-0">

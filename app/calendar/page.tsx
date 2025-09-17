@@ -4,52 +4,17 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ExternalLink, Plus } from "lucide-react"
 
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Machine Learning Workshop",
-    date: "2024-11-15",
-    time: "6:00 PM - 8:00 PM",
-    location: "Engineering Building, Room 205",
-    type: "Workshop",
-    description: "Introduction to neural networks and deep learning frameworks using Python and TensorFlow.",
-    attendees: 25,
-    maxAttendees: 30,
-  },
-  {
-    id: 2,
-    title: "Industry Panel Discussion",
-    date: "2024-11-22",
-    time: "7:00 PM - 8:30 PM",
-    location: "Student Center Auditorium",
-    type: "Panel",
-    description: "Career paths in electrical and computer engineering with industry professionals.",
-    attendees: 45,
-    maxAttendees: 100,
-  },
-  {
-    id: 3,
-    title: "Project Showcase",
-    date: "2024-12-05",
-    time: "5:00 PM - 7:00 PM",
-    location: "Engineering Building Atrium",
-    type: "Showcase",
-    description: "Present your semester projects to peers, faculty, and industry representatives.",
-    attendees: 15,
-    maxAttendees: 50,
-  },
-  {
-    id: 4,
-    title: "Arduino Basics Workshop",
-    date: "2024-12-12",
-    time: "3:00 PM - 5:00 PM",
-    location: "Electronics Lab, Room 101",
-    type: "Workshop",
-    description: "Hands-on introduction to Arduino programming and basic electronics projects.",
-    attendees: 18,
-    maxAttendees: 20,
-  },
-]
+const upcomingEvents: {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  type: string;
+  description: string;
+  attendees: number;
+  maxAttendees: number;
+}[] = []
 
 const eventTypeColors = {
   Workshop: "bg-primary/20 text-primary border-primary/30",
@@ -87,26 +52,11 @@ export default function CalendarPage() {
               </p>
             </CardHeader>
             <CardContent>
-              {/* Google Calendar Embed Placeholder */}
-              <div className="relative w-full h-96 bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center">
-                <div className="text-center">
-                  <Calendar className="w-16 h-16 text-primary mx-auto mb-4" />
-                  <h3 className="text-white text-lg font-semibold mb-2">Google Calendar Integration</h3>
-                  <p className="text-gray-400 mb-4 max-w-md">
-                    Our full event calendar will be embedded here. For now, check out our upcoming events below.
-                  </p>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="border-gray-600 text-white hover:bg-gray-700 bg-transparent"
-                  >
-                    <Link href="https://calendar.google.com/placeholder" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Open in Google Calendar
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+            <iframe 
+              src="https://calendar.google.com/calendar/embed?src=3695cdde43cb523cdc2d9375046f3b46cdfced769c7846afc5dd57c4061b9900%40group.calendar.google.com&ctz=America%2FNew_York" 
+              className="w-full h-[600px] border-0 rounded-lg"
+              title="IEEE Calendar"
+            ></iframe>
             </CardContent>
           </Card>
         </div>

@@ -153,6 +153,18 @@
 /* Added smooth scrolling and enhanced animations */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* Account for fixed navigation */
+}
+
+/* Optimize scrolling performance */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shifts during scroll */
+body {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Enhanced hover effects for cards */

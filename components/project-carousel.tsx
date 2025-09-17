@@ -5,15 +5,28 @@ import Image from "next/image"
 
 export function ProjectCarousel() {
   return (
-    <div className="w-full">
+    <div className="w-full" style={{ contain: "layout style paint" }}>
       <Carousel autoPlay autoPlayInterval={6000} className="w-full">
         {projects.map((project) => (
           <CarouselItem key={project.id}>
             <Card className="bg-gray-900 border-gray-800 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-80">
-                  <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                  <Image 
+                    src={project.image || "/placeholder.svg"} 
+                    alt={project.title} 
+                    fill 
+                    className="object-cover"
+                    priority={false}
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                   <div className="absolute inset-0 bg-black/40" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-primary text-primary-foreground text-sm font-semibold rounded-full border border-primary/50 shadow-lg">
+                      {project.course}
+                    </span>
+                  </div>
                 </div>
                 <CardContent className="p-8 flex flex-col justify-center">
                   <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>

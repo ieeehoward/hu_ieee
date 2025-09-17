@@ -29,7 +29,7 @@ export function CoursesPreview() {
               Current Courses
             </h3>
             <Badge variant="secondary" className="bg-primary text-white border-primary">
-              Fall 2024
+              Fall 2025
             </Badge>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

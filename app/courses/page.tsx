@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { courses } from "@/constants/data"
+import { courses, projects } from "@/constants/data"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Calendar, BookOpen, Clock, Users, GraduationCap } from "lucide-react"
@@ -10,6 +10,9 @@ import { CourseInstructorsCarousel } from "@/components/course-instructors-carou
 export default function CoursesPage() {
   const currentCourses = courses.filter((course) => course.status === "current")
   const pastCourses = courses.filter((course) => course.status === "past")
+  
+  // Calculate total enrollment across all courses
+  const totalEnrollment = courses.reduce((total, course) => total + course.enrolled, 0)
 
   return (
     <main className="min-h-screen pt-16">
@@ -28,7 +31,7 @@ export default function CoursesPage() {
       {/* Course Statistics */}
       <section className="py-12 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
             <div className="text-center">
               <div className="text-3xl font-bold text-primary mb-2">{courses.length}</div>
               <p className="text-gray-300">Total Courses</p>
@@ -38,12 +41,8 @@ export default function CoursesPage() {
               <p className="text-gray-300">Current Offerings</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">200+</div>
+              <div className="text-3xl font-bold text-primary mb-2">{totalEnrollment}+</div>
               <p className="text-gray-300">Students Enrolled</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">95%</div>
-              <p className="text-gray-300">Completion Rate</p>
             </div>
           </div>
         </div>
@@ -79,7 +78,7 @@ export default function CoursesPage() {
               </p>
             </div>
             <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 text-lg px-4 py-2">
-              Fall 2024
+              Fall 2025
             </Badge>
           </div>
 
@@ -108,7 +107,7 @@ export default function CoursesPage() {
                     </Badge>
                     <div className="flex items-center text-gray-400 text-sm">
                       <Calendar className="w-4 h-4 mr-1" />
-                      <span>12 weeks</span>
+                      <span>{course.duration}</span>
                     </div>
                   </div>
                   <CardTitle className="text-white group-hover:text-primary transition-colors text-xl">
@@ -120,7 +119,7 @@ export default function CoursesPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-gray-400 text-sm">
                       <Users className="w-4 h-4 mr-1" />
-                      <span>25+ enrolled</span>
+                      <span>{course.enrolled}+ enrolled</span>
                     </div>
                     <Button asChild className="bg-primary hover:bg-primary/90 text-white">
                       <Link href={`/courses/${course.slug}`}>

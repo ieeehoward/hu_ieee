@@ -45,27 +45,6 @@ const benefits = [
   },
 ]
 
-const upcomingEvents = [
-  {
-    date: "Nov 15",
-    title: "Machine Learning Workshop",
-    description: "Introduction to neural networks and deep learning frameworks",
-    time: "6:00 PM - 8:00 PM",
-  },
-  {
-    date: "Nov 22",
-    title: "Industry Panel Discussion",
-    description: "Career paths in electrical and computer engineering",
-    time: "7:00 PM - 8:30 PM",
-  },
-  {
-    date: "Dec 5",
-    title: "Project Showcase",
-    description: "Present your semester projects to peers and faculty",
-    time: "5:00 PM - 7:00 PM",
-  },
-]
-
 export default function CommunityPage() {
   return (
     <main className="min-h-screen pt-16">
@@ -81,14 +60,6 @@ export default function CommunityPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white px-8">
               <Link href="#join">Join Now</Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-gray-600 text-white hover:bg-gray-800 bg-transparent"
-            >
-              <Link href="#events">View Events</Link>
             </Button>
           </div>
         </div>
@@ -147,7 +118,7 @@ export default function CommunityPage() {
                   <li>• Quick Q&A with peers</li>
                 </ul>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                  <Link href="https://groupme.com/join_group/placeholder" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://groupme.com/join_group/96131081/uo3DOddE" target="_blank" rel="noopener noreferrer">
                     Join GroupMe Chat
                     <MessageCircle className="ml-2 w-4 h-4" />
                   </Link>
@@ -172,52 +143,13 @@ export default function CommunityPage() {
                   <li>• Resume and career services</li>
                 </ul>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                  <Link href="https://forms.google.com/placeholder" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://forms.gle/xymBWBfqJHvPH6vP8" target="_blank" rel="noopener noreferrer">
                     Sign Up for Membership
                     <UserPlus className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Upcoming Events */}
-      <section id="events" className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">Upcoming Events</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Don't miss out on these exciting opportunities to learn, network, and grow with fellow engineers.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {upcomingEvents.map((event, index) => (
-              <Card key={index} className="bg-black/40 border-gray-800 hover:border-primary/50 transition-colors">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="bg-primary/20 text-primary px-3 py-1 rounded-md text-sm font-semibold">
-                      {event.date}
-                    </div>
-                    <Calendar className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{event.title}</h3>
-                  <p className="text-gray-400 mb-4 leading-relaxed">{event.description}</p>
-                  <p className="text-primary font-medium">{event.time}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-gray-600 text-white hover:bg-gray-800 bg-transparent"
-            >
-              <Link href="/calendar">View Full Calendar</Link>
-            </Button>
           </div>
         </div>
       </section>

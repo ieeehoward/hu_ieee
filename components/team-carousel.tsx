@@ -5,14 +5,22 @@ import Image from "next/image"
 
 export function TeamCarousel() {
   return (
-    <div className="w-full">
+    <div className="w-full" style={{ contain: "layout style paint" }}>
       <Carousel autoPlay autoPlayInterval={4000} className="w-full">
         {teamMembers.map((member) => (
           <CarouselItem key={member.id}>
             <Card className="bg-gray-900 border-gray-800 overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
                 <div className="relative h-64 md:h-80">
-                  <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                  <Image 
+                    src={member.image || "/placeholder.svg"} 
+                    alt={member.name} 
+                    fill 
+                    className="object-cover"
+                    priority={false}
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <CardContent className="md:col-span-2 p-8 flex flex-col justify-center">

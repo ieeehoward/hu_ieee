@@ -6,7 +6,7 @@ import { ContactSection } from "@/components/contact-section"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" style={{ contain: "layout style" }}>
       <HeroSection />
       <AboutSection />
       <CoursesPreview />
