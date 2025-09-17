@@ -73,11 +73,11 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-background via-secondary to-primary relative overflow-hidden">
         <div className="absolute inset-0 tech-grid opacity-10" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="section-header text-white mb-6">Get In Touch</h1>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          <h1 className="section-header text-foreground mb-6">Get In Touch</h1>
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             Have questions about our programs, want to collaborate, or interested in joining? We'd love to hear from you
             and help you get involved.
           </p>
@@ -85,28 +85,28 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-6">How to Reach Us</h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-4xl font-bold text-foreground mb-6">How to Reach Us</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Choose the method that works best for you. We're here to help and answer any questions you might have.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {contactMethods.map((method, index) => (
-              <Card key={index} className="bg-black/40 border-gray-800 hover:border-primary/50 transition-colors group">
+              <Card key={index} className="bg-card/60 dark:bg-black/40 border-border hover:border-primary/50 transition-colors group">
                 <CardContent className="p-6 text-center">
                   <method.icon className="w-12 h-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-lg font-semibold text-white mb-2">{method.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{method.description}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">{method.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4">{method.description}</p>
                   <div className="text-primary font-medium text-sm mb-4">{method.contact}</div>
                   <Button
                     asChild
                     size="sm"
                     variant="outline"
-                    className="border-gray-600 text-white hover:bg-primary hover:border-primary bg-transparent"
+                    className="border-border text-foreground hover:bg-primary hover:border-primary bg-transparent"
                   >
                     <Link href={method.action} target={method.action.startsWith("http") ? "_blank" : undefined}>
                       Contact
@@ -120,82 +120,82 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-20 bg-black">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
             <div>
-              <h2 className="text-4xl font-bold text-white mb-6">Send Us a Message</h2>
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              <h2 className="text-4xl font-bold text-foreground mb-6">Send Us a Message</h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Fill out the form below and we'll get back to you as soon as possible. We typically respond within 24
                 hours.
               </p>
 
-              <Card className="bg-gray-900 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <form className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="firstName" className="text-white">
+                        <Label htmlFor="firstName" className="text-foreground">
                           First Name
                         </Label>
                         <Input
                           id="firstName"
                           type="text"
-                          className="bg-black/40 border-gray-700 text-white focus:border-primary"
+                          className="bg-background border-border text-foreground focus:border-primary"
                           placeholder="John"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="lastName" className="text-white">
+                        <Label htmlFor="lastName" className="text-foreground">
                           Last Name
                         </Label>
                         <Input
                           id="lastName"
                           type="text"
-                          className="bg-black/40 border-gray-700 text-white focus:border-primary"
+                          className="bg-background border-border text-foreground focus:border-primary"
                           placeholder="Doe"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="email" className="text-white">
+                      <Label htmlFor="email" className="text-foreground">
                         Email Address
                       </Label>
                       <Input
                         id="email"
                         type="email"
-                        className="bg-black/40 border-gray-700 text-white focus:border-primary"
+                        className="bg-background border-border text-foreground focus:border-primary"
                         placeholder="john.doe@example.com"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="subject" className="text-white">
+                      <Label htmlFor="subject" className="text-foreground">
                         Subject
                       </Label>
                       <Input
                         id="subject"
                         type="text"
-                        className="bg-black/40 border-gray-700 text-white focus:border-primary"
+                        className="bg-background border-border text-foreground focus:border-primary"
                         placeholder="What's this about?"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="message" className="text-white">
+                      <Label htmlFor="message" className="text-foreground">
                         Message
                       </Label>
                       <Textarea
                         id="message"
                         rows={5}
-                        className="bg-black/40 border-gray-700 text-white focus:border-primary resize-none"
+                        className="bg-background border-border text-foreground focus:border-primary resize-none"
                         placeholder="Tell us more about your inquiry..."
                       />
                     </div>
 
-                    <Button type="submit" className="bg-primary hover:bg-primary/90 text-white w-full">
+                    <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                       <Send className="w-4 h-4 mr-2" />
                       Send Message
                     </Button>
@@ -207,10 +207,10 @@ export default function ContactPage() {
             {/* Quick Actions & Info */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Quick Actions</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-6">Quick Actions</h3>
                 <div className="space-y-4">
                   {quickActions.map((action, index) => (
-                    <Card key={index} className="bg-gray-900 border-gray-800 hover:border-primary/50 transition-colors">
+                    <Card key={index} className="bg-card border-border hover:border-primary/50 transition-colors">
                       <CardContent className="p-4">
                         <Link
                           href={action.action}
@@ -221,12 +221,12 @@ export default function ContactPage() {
                             <action.icon className="w-6 h-6" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-white font-semibold group-hover:text-primary transition-colors">
+                            <h4 className="text-foreground font-semibold group-hover:text-primary transition-colors">
                               {action.title}
                             </h4>
-                            <p className="text-gray-400 text-sm">{action.description}</p>
+                            <p className="text-muted-foreground text-sm">{action.description}</p>
                           </div>
-                          <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-primary transition-colors" />
+                          <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                         </Link>
                       </CardContent>
                     </Card>
@@ -235,14 +235,14 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Follow Us</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-6">Follow Us</h3>
                 <div className="space-y-4">
                   {socialLinks.map((link) => {
                     const IconComponent = iconMap[link.icon as keyof typeof iconMap]
                     return (
                       <Card
                         key={link.name}
-                        className="bg-gray-900 border-gray-800 hover:border-primary/50 transition-colors"
+                        className="bg-card border-border hover:border-primary/50 transition-colors"
                       >
                         <CardContent className="p-4">
                           <Link
@@ -252,10 +252,10 @@ export default function ContactPage() {
                             className="flex items-center group"
                           >
                             <IconComponent className="w-6 h-6 text-primary mr-4" />
-                            <span className="text-white group-hover:text-primary transition-colors font-medium">
+                            <span className="text-foreground group-hover:text-primary transition-colors font-medium">
                               {link.name}
                             </span>
-                            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors ml-auto" />
+                            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors ml-auto" />
                           </Link>
                         </CardContent>
                       </Card>
@@ -266,14 +266,14 @@ export default function ContactPage() {
 
               <Card className="bg-primary/10 border-primary/30">
                 <CardHeader>
-                  <CardTitle className="text-white">Need Immediate Help?</CardTitle>
+                  <CardTitle className="text-foreground">Need Immediate Help?</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300 text-sm mb-4">
+                  <p className="text-muted-foreground text-sm mb-4">
                     For urgent matters or immediate assistance, join our GroupMe chat where our team and community
                     members are active throughout the day.
                   </p>
-                  <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
+                  <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                     <Link href={externalLinks.groupme} target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Join GroupMe
@@ -287,12 +287,12 @@ export default function ContactPage() {
       </section>
 
       {/* Location & Hours */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <Card className="bg-black/40 border-gray-800">
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-white flex items-center">
+                <CardTitle className="text-foreground flex items-center">
                   <MapPin className="w-6 h-6 text-primary mr-3" />
                   Our Location
                 </CardTitle>
@@ -300,8 +300,8 @@ export default function ContactPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Howard University</h4>
-                    <p className="text-gray-300">
+                    <h4 className="text-foreground font-semibold mb-2">Howard University</h4>
+                    <p className="text-muted-foreground">
                       College of Architecture and Engineering
                       <br />
                       2366 Sixth Street NW
@@ -312,7 +312,7 @@ export default function ContactPage() {
                   <Button
                     asChild
                     variant="outline"
-                    className="border-gray-600 text-white hover:bg-gray-800 bg-transparent"
+                    className="border-border text-foreground hover:bg-accent bg-transparent"
                   >
                     <Link href={externalLinks.location} target="_blank" rel="noopener noreferrer">
                       <MapPin className="w-4 h-4 mr-2" />
@@ -323,9 +323,9 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/40 border-gray-800">
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-white flex items-center">
+                <CardTitle className="text-foreground flex items-center">
                   <Clock className="w-6 h-6 text-primary mr-3" />
                   Office Hours
                 </CardTitle>
@@ -334,19 +334,19 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Monday - Friday</span>
-                      <span className="text-white">10:00 AM - 6:00 PM</span>
+                      <span className="text-muted-foreground">Monday - Friday</span>
+                      <span className="text-foreground">10:00 AM - 6:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Saturday</span>
-                      <span className="text-white">By Appointment</span>
+                      <span className="text-muted-foreground">Saturday</span>
+                      <span className="text-foreground">By Appointment</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Sunday</span>
-                      <span className="text-gray-400">Closed</span>
+                      <span className="text-muted-foreground">Sunday</span>
+                      <span className="text-muted-foreground">Closed</span>
                     </div>
                   </div>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     Office hours are during the academic year. Summer hours may vary.
                   </p>
                 </div>
@@ -357,14 +357,14 @@ export default function ContactPage() {
       </section>
 
       {/* Footer */}
-      <section className="py-12 bg-black border-t border-gray-800">
+      <section className="py-12 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
               <Image src="/ieee-logo.png" alt="IEEE Logo" width={32} height={32} />
-              <span className="text-white font-semibold">Howard University IEEE Student Branch</span>
+              <span className="text-foreground font-semibold">Howard University IEEE Student Branch</span>
             </div>
-            <p className="text-gray-400">© {currentYear} Howard University IEEE Student Branch. All rights reserved.</p>
+            <p className="text-muted-foreground">© {currentYear} Howard University IEEE Student Branch. All rights reserved.</p>
           </div>
         </div>
       </section>

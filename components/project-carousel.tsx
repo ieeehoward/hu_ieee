@@ -10,7 +10,7 @@ export async function ProjectCarousel() {
       <Carousel autoPlay autoPlayInterval={6000} className="w-full">
         {projects.map((project) => (
           <CarouselItem key={project.id}>
-            <Card className="bg-gray-900 border-gray-800 overflow-hidden">
+            <Card className="bg-card border-border overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-80">
                   <Image 
@@ -30,8 +30,8 @@ export async function ProjectCarousel() {
                   </div>
                 </div>
                 <CardContent className="p-8 flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">{project.description}</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">{project.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span

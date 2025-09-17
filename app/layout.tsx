@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
 import { ConditionalNavigation } from "@/components/conditional-navigation"
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "Howard University IEEE Student Branch",
@@ -18,12 +19,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ConditionalNavigation />
-          {children}
-        </Suspense>
+        <ThemeProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ConditionalNavigation />
+            {children}
+          </Suspense>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

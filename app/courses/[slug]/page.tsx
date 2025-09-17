@@ -79,11 +79,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
   return (
     <main className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="py-12 bg-black relative overflow-hidden">
+      <section className="py-12 bg-gradient-to-br from-background via-secondary to-primary relative overflow-hidden">
         <div className="absolute inset-0 tech-grid opacity-10" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
-            <Button asChild variant="outline" className="border-gray-600 text-white hover:bg-gray-800 bg-transparent">
+            <Button asChild variant="outline" className="border-border text-foreground hover:bg-accent bg-transparent">
               <Link href="/courses">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Courses
@@ -94,40 +94,40 @@ export default async function CoursePage({ params }: CoursePageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="flex items-center gap-4 mb-4">
-                <Badge className={course.status === "current" ? "bg-primary text-white" : "bg-gray-700 text-gray-300"}>
+                <Badge className={course.status === "current" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}>
                   {course.status === "current" ? "Current" : "Completed"}
                 </Badge>
-                <Badge variant="outline" className="bg-primary text-white border-primary">
+                <Badge variant="outline" className="bg-primary text-primary-foreground border-primary">
                   {course.semester} {course.year}
                 </Badge>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{course.title}</h1>
-              <p className="text-xl text-gray-300 leading-relaxed mb-8">{course.description}</p>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">{course.title}</h1>
+              <p className="text-xl text-muted-foreground leading-relaxed mb-8">{course.description}</p>
 
               {/* Course Meta */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="flex items-center text-gray-300">
+                <div className="flex items-center text-muted-foreground">
                   <Clock className="w-5 h-5 text-primary mr-2" />
                   <span className="text-sm">{courseDetails.duration}</span>
                 </div>
-                <div className="flex items-center text-gray-300">
+                <div className="flex items-center text-muted-foreground">
                   <BookOpen className="w-5 h-5 text-primary mr-2" />
                   <span className="text-sm">{courseDetails.level}</span>
                 </div>
-                <div className="flex items-center text-gray-300">
+                <div className="flex items-center text-muted-foreground">
                   <Users className="w-5 h-5 text-primary mr-2" />
                   <span className="text-sm">
                     {courseDetails.enrolled}/{courseDetails.maxCapacity}
                   </span>
                 </div>
-                <div className="flex items-center text-gray-300">
+                <div className="flex items-center text-muted-foreground">
                   <User className="w-5 h-5 text-primary mr-2" />
                   <span className="text-sm">Dr. Johnson</span>
                 </div>
               </div>
 
               {course.status === "current" && (
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white">
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Link href="/community">Enroll Now</Link>
                 </Button>
               )}
@@ -144,15 +144,15 @@ export default async function CoursePage({ params }: CoursePageProps) {
       </section>
 
       {/* Course Content */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">
               {/* Learning Objectives */}
-              <Card className="bg-black/40 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center">
+                  <CardTitle className="text-foreground flex items-center">
                     <Target className="w-6 h-6 text-primary mr-3" />
                     Learning Objectives
                   </CardTitle>
@@ -160,7 +160,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 <CardContent>
                   <ul className="space-y-3">
                     {courseDetails.learningObjectives.map((objective, index) => (
-                      <li key={index} className="flex items-start text-gray-300">
+                      <li key={index} className="flex items-start text-muted-foreground">
                         <CheckCircle className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                         <span>{objective}</span>
                       </li>
@@ -170,9 +170,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
               </Card>
 
               {/* Syllabus */}
-              <Card className="bg-black/40 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center">
+                  <CardTitle className="text-foreground flex items-center">
                     <Calendar className="w-6 h-6 text-primary mr-3" />
                     Course Syllabus
                   </CardTitle>
@@ -182,12 +182,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
                     {courseDetails.syllabus.map((week) => (
                       <div key={week.week} className="border-l-2 border-primary/30 pl-4">
                         <div className="flex items-center mb-2">
-                          <span className="bg-primary text-white px-2 py-1 rounded text-sm font-semibold mr-3">
+                          <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-sm font-semibold mr-3">
                             Week {week.week}
                           </span>
-                          <h4 className="text-white font-semibold">{week.topic}</h4>
+                          <h4 className="text-foreground font-semibold">{week.topic}</h4>
                         </div>
-                        <p className="text-gray-400 text-sm">{week.description}</p>
+                        <p className="text-muted-foreground text-sm">{week.description}</p>
                       </div>
                     ))}
                   </div>
@@ -198,14 +198,14 @@ export default async function CoursePage({ params }: CoursePageProps) {
             {/* Sidebar */}
             <div className="space-y-8">
               {/* Prerequisites */}
-              <Card className="bg-black/40 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-white text-lg">Prerequisites</CardTitle>
+                  <CardTitle className="text-foreground text-lg">Prerequisites</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {courseDetails.prerequisites.map((prereq, index) => (
-                      <li key={index} className="flex items-start text-gray-300 text-sm">
+                      <li key={index} className="flex items-start text-muted-foreground text-sm">
                         <CheckCircle className="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
                         <span>{prereq}</span>
                       </li>
@@ -215,14 +215,14 @@ export default async function CoursePage({ params }: CoursePageProps) {
               </Card>
 
               {/* Resources */}
-              <Card className="bg-black/40 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-white text-lg">Course Resources</CardTitle>
+                  <CardTitle className="text-foreground text-lg">Course Resources</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {courseDetails.resources.map((resource, index) => (
-                      <li key={index} className="flex items-start text-gray-300 text-sm">
+                      <li key={index} className="flex items-start text-muted-foreground text-sm">
                         <ExternalLink className="w-4 h-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
                         <span>{resource}</span>
                       </li>
@@ -232,9 +232,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
               </Card>
 
               {/* Instructor */}
-              <Card className="bg-black/40 border-gray-800">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-white text-lg">Instructor</CardTitle>
+                  <CardTitle className="text-foreground text-lg">Instructor</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center mb-3">
@@ -242,11 +242,11 @@ export default async function CoursePage({ params }: CoursePageProps) {
                       <User className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold">{courseDetails.instructor}</h4>
-                      <p className="text-gray-400 text-sm">Faculty Advisor</p>
+                      <h4 className="text-foreground font-semibold">{courseDetails.instructor}</h4>
+                      <p className="text-muted-foreground text-sm">Faculty Advisor</p>
                     </div>
                   </div>
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     Professor of Electrical Engineering with expertise in embedded systems and IoT applications.
                   </p>
                 </CardContent>
@@ -255,9 +255,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
               {course.status === "current" && (
                 <Card className="bg-primary/10 border-primary/30">
                   <CardContent className="p-6 text-center">
-                    <h3 className="text-white font-semibold mb-2">Ready to Join?</h3>
-                    <p className="text-gray-300 text-sm mb-4">Spaces are limited. Enroll now to secure your spot.</p>
-                    <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
+                    <h3 className="text-foreground font-semibold mb-2">Ready to Join?</h3>
+                    <p className="text-muted-foreground text-sm mb-4">Spaces are limited. Enroll now to secure your spot.</p>
+                    <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                       <Link href="/community">Enroll Now</Link>
                     </Button>
                   </CardContent>

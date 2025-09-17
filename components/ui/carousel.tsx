@@ -71,7 +71,7 @@ export function Carousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 border-gray-600 text-white hover:bg-black/70 backdrop-blur-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 border-border text-foreground hover:bg-background/90 backdrop-blur-sm"
             onClick={prevSlide}
           >
             <ChevronLeft className="w-4 h-4" />
@@ -79,7 +79,7 @@ export function Carousel({
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 border-gray-600 text-white hover:bg-black/70 backdrop-blur-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 border-border text-foreground hover:bg-background/90 backdrop-blur-sm"
             onClick={nextSlide}
           >
             <ChevronRight className="w-4 h-4" />
@@ -95,7 +95,7 @@ export function Carousel({
               key={index}
               className={cn(
                 "w-2 h-2 rounded-full transition-colors",
-                index === currentIndex ? "bg-primary" : "bg-gray-400 hover:bg-gray-300",
+                index === currentIndex ? "bg-primary" : "bg-muted-foreground hover:bg-muted",
               )}
               onClick={() => goToSlide(index)}
             />

@@ -10,7 +10,7 @@ export async function TeamCarousel() {
       <Carousel autoPlay autoPlayInterval={4000} className="w-full">
         {teamMembers.map((member) => (
           <CarouselItem key={member.id}>
-            <Card className="bg-gray-900 border-gray-800 overflow-hidden">
+            <Card className="bg-card border-border overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
                 <div className="relative h-64 md:h-80">
                   <Image 
@@ -25,9 +25,9 @@ export async function TeamCarousel() {
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <CardContent className="md:col-span-2 p-8 flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{member.name}</h3>
                   <p className="text-primary font-semibold mb-4 text-lg">{member.role}</p>
-                  <p className="text-gray-300 leading-relaxed">{member.bio}</p>
+                  <p className="text-muted-foreground leading-relaxed">{member.bio}</p>
                 </CardContent>
               </div>
             </Card>

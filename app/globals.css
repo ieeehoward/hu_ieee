@@ -4,25 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark mode IEEE theme */
-  --background: oklch(0.05 0 0); /* Deep black */
-  --foreground: oklch(0.98 0 0); /* Pure white */
-  --card: oklch(0.08 0 0); /* Dark gray */
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.08 0 0);
-  --popover-foreground: oklch(0.98 0 0);
+  /* Light mode IEEE theme */
+  --background: oklch(0.98 0 0); /* Light gray/white */
+  --foreground: oklch(0.15 0 0); /* Dark text */
+  --card: oklch(1 0 0); /* Pure white */
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
   --primary: oklch(0.55 0.15 240); /* IEEE Blue #0076bb */
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.15 0 0); /* Dark gray */
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.55 0.15 240); /* IEEE Blue accent */
-  --accent-foreground: oklch(0.98 0 0);
+  --primary-foreground: oklch(1 0 0); /* White text on blue */
+  --secondary: oklch(0.95 0 0); /* Light gray */
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.92 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.9 0 0); /* Very light blue-gray */
+  --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.2 0 0);
-  --input: oklch(0.15 0 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.85 0 0); /* Light border */
+  --input: oklch(0.95 0 0);
   --ring: oklch(0.55 0.15 240);
   --chart-1: oklch(0.55 0.15 240);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -30,13 +30,13 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.5rem;
-  --sidebar: oklch(0.08 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
   --sidebar-primary: oklch(0.55 0.15 240);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.15 0 0);
+  --sidebar-border: oklch(0.85 0 0);
   --sidebar-ring: oklch(0.55 0.15 240);
 }
 
@@ -129,15 +129,15 @@
 
 /* Custom IEEE technical styling */
 .ieee-gradient {
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0076bb 100%);
+  background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 50%, var(--primary) 100%);
 }
 
 .ieee-blue {
-  color: #0076bb;
+  color: var(--primary);
 }
 
 .ieee-blue-bg {
-  background-color: #0076bb;
+  background-color: var(--primary);
 }
 
 .section-header {
@@ -145,9 +145,14 @@
 }
 
 .tech-grid {
+  background-image: linear-gradient(rgba(0, 118, 187, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 118, 187, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .tech-grid {
   background-image: linear-gradient(rgba(0, 118, 187, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 118, 187, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
 
 /* Added smooth scrolling and enhanced animations */

@@ -13,11 +13,11 @@ const iconMap = {
 
 export function CommunitySection() {
   return (
-    <section id="community" className="py-20 bg-gray-900">
+    <section id="community" className="py-20 bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="section-header text-white mb-6">Join Our Community</h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="section-header text-foreground mb-6">Join Our Community</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Connect with fellow engineers, collaborate on exciting projects, and be part of a vibrant community that's
             shaping the future of technology. Your journey starts here.
           </p>
@@ -25,15 +25,15 @@ export function CommunitySection() {
 
         {/* Call to Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <Card className="bg-black/40 border-gray-800 hover:border-primary/50 transition-colors group relative z-10">
+          <Card className="bg-card/60 dark:bg-black/40 border-border hover:border-primary/50 transition-colors group relative z-10">
             <CardContent className="p-8 text-center">
               <MessageCircle className="w-16 h-16 text-primary mx-auto mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-bold text-white mb-4">Join Our GroupMe</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Join Our GroupMe</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Stay connected with daily updates, event announcements, and engage in technical discussions with your
                 peers.
               </p>
-              <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
+              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                 <Link href="https://groupme.com/join_group/placeholder" target="_blank" rel="noopener noreferrer">
                   Join GroupMe Chat
                   <MessageCircle className="ml-2 w-4 h-4" />
@@ -42,14 +42,14 @@ export function CommunitySection() {
             </CardContent>
           </Card>
 
-          <Card className="bg-black/40 border-gray-800 hover:border-primary/50 transition-colors group relative z-10">
+          <Card className="bg-card/60 dark:bg-black/40 border-border hover:border-primary/50 transition-colors group relative z-10">
             <CardContent className="p-8 text-center">
               <UserPlus className="w-16 h-16 text-primary mx-auto mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="text-2xl font-bold text-white mb-4">Official Membership</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
+              <h3 className="text-2xl font-bold text-foreground mb-4">Official Membership</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Become an official IEEE member and unlock exclusive benefits, resources, and networking opportunities.
               </p>
-              <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
+              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                 <Link href="https://forms.google.com/placeholder" target="_blank" rel="noopener noreferrer">
                   Sign Up Now
                   <UserPlus className="ml-2 w-4 h-4" />
@@ -61,7 +61,7 @@ export function CommunitySection() {
 
         {/* Social Links */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold text-white mb-8">Follow Us</h3>
+          <h3 className="text-2xl font-bold text-foreground mb-8">Follow Us</h3>
           <div className="flex flex-wrap justify-center gap-6">
             {socialLinks.map((link) => {
               const IconComponent = iconMap[link.icon as keyof typeof iconMap]
@@ -71,7 +71,7 @@ export function CommunitySection() {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="border-gray-600 text-white hover:bg-primary hover:border-primary transition-all duration-300 group bg-transparent"
+                  className="border-border text-foreground hover:bg-primary hover:border-primary transition-all duration-300 group bg-transparent"
                 >
                   <Link href={link.url} target="_blank" rel="noopener noreferrer">
                     <IconComponent className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
