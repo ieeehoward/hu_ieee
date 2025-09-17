@@ -296,3 +296,21 @@ export const socialLinks = [
     icon: "link",
   },
 ]
+
+// Centralized external links for the entire application
+export const externalLinks = {
+  // Email and contact
+  email: "mailto:ieeehowardbison@gmail.com",
+  location: "https://share.google/AoGWHRD38lmKDHIZ3",
+  
+  // Community and registration
+  groupme: "https://groupme.com/join_group/96131081/uo3DOddE",
+  registrationForm: "https://forms.gle/xymBWBfqJHvPH6vP8",
+  
+  // Calendar
+  calendarEmbed: "https://calendar.google.com/calendar/embed?src=3695cdde43cb523cdc2d9375046f3b46cdfced769c7846afc5dd57c4061b9900%40group.calendar.google.com&ctz=America%2FNew_York",
+  calendarView: "https://calendar.google.com/placeholder",
+  
+  // Community section anchor
+  communityJoin: "#join"
+}

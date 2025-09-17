@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { externalLinks } from "@/constants/data"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, ExternalLink, Plus } from "lucide-react"
 
@@ -53,7 +54,7 @@ export default function CalendarPage() {
             </CardHeader>
             <CardContent>
             <iframe 
-              src="https://calendar.google.com/calendar/embed?src=3695cdde43cb523cdc2d9375046f3b46cdfced769c7846afc5dd57c4061b9900%40group.calendar.google.com&ctz=America%2FNew_York" 
+              src={externalLinks.calendarEmbed} 
               className="w-full h-[600px] border-0 rounded-lg"
               title="IEEE Calendar"
             ></iframe>
@@ -201,7 +202,7 @@ export default function CalendarPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white">
-              <Link href="https://calendar.google.com/placeholder" target="_blank" rel="noopener noreferrer">
+              <Link href={externalLinks.calendarView} target="_blank" rel="noopener noreferrer">
                 <Calendar className="w-5 h-5 mr-2" />
                 Subscribe to Calendar
               </Link>

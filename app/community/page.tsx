@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { socialLinks } from "@/constants/data"
+import { socialLinks, externalLinks } from "@/constants/data"
 import {
   MessageCircle,
   UserPlus,
@@ -59,7 +59,7 @@ export default function CommunityPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white px-8">
-              <Link href="#join">Join Now</Link>
+              <Link href={externalLinks.communityJoin}>Join Now</Link>
             </Button>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function CommunityPage() {
                   <li>• Quick Q&A with peers</li>
                 </ul>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                  <Link href="https://groupme.com/join_group/96131081/uo3DOddE" target="_blank" rel="noopener noreferrer">
+                  <Link href={externalLinks.groupme} target="_blank" rel="noopener noreferrer">
                     Join GroupMe Chat
                     <MessageCircle className="ml-2 w-4 h-4" />
                   </Link>
@@ -143,7 +143,7 @@ export default function CommunityPage() {
                   <li>• Resume and career services</li>
                 </ul>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                  <Link href="https://forms.gle/xymBWBfqJHvPH6vP8" target="_blank" rel="noopener noreferrer">
+                  <Link href={externalLinks.registrationForm} target="_blank" rel="noopener noreferrer">
                     Sign Up for Membership
                     <UserPlus className="ml-2 w-4 h-4" />
                   </Link>

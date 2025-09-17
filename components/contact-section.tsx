@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Mail, MapPin, Clock } from "lucide-react"
+import { externalLinks } from "@/constants/data"
 import Image from "next/image"
 
 export function ContactSection() {
@@ -23,7 +24,7 @@ export function ContactSection() {
               <h3 className="text-xl font-semibold text-white mb-2">Email Us</h3>
               <p className="text-gray-400 mb-4">Get in touch for any inquiries</p>
               <a
-                href="mailto:ieeehowardbison@gmail.com"
+                href={externalLinks.email}
                 className="text-primary hover:text-primary/80 transition-colors font-medium"
               >
                 ieeehowardbison@gmail.com

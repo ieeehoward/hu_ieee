@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { socialLinks } from "@/constants/data"
+import { socialLinks, externalLinks } from "@/constants/data"
 import Link from "next/link"
 import {
   Mail,
@@ -32,14 +32,14 @@ const contactMethods = [
     title: "Email Us",
     description: "Get in touch for any inquiries or questions",
     contact: "ieeehowardbison@gmail.com",
-    action: "mailto:ieeehowardbison@gmail.com",
+    action: externalLinks.email,
   },
   {
     icon: MapPin,
     title: "Visit Us",
     description: "Find us on the Howard University campus",
     contact: "College of Architecture and Engineering, Washington, DC",
-    action: "https://share.google/AoGWHRD38lmKDHIZ3",
+    action: externalLinks.location,
   }
 ]
 
@@ -48,14 +48,14 @@ const quickActions = [
     icon: MessageCircle,
     title: "Join GroupMe",
     description: "Connect with our community chat",
-    action: "https://groupme.com/join_group/96131081/uo3DOddE",
+    action: externalLinks.groupme,
     color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   },
   {
     icon: Users,
     title: "Become a Member",
     description: "Sign up for official membership",
-    action: "https://forms.gle/xymBWBfqJHvPH6vP8",
+    action: externalLinks.registrationForm,
     color: "bg-green-500/20 text-green-400 border-green-500/30",
   },
   {
@@ -274,7 +274,7 @@ export default function ContactPage() {
                     members are active throughout the day.
                   </p>
                   <Button asChild className="bg-primary hover:bg-primary/90 text-white w-full">
-                    <Link href="https://groupme.com/join_group/96131081/uo3DOddE" target="_blank" rel="noopener noreferrer">
+                    <Link href={externalLinks.groupme} target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Join GroupMe
                     </Link>
@@ -314,7 +314,7 @@ export default function ContactPage() {
                     variant="outline"
                     className="border-gray-600 text-white hover:bg-gray-800 bg-transparent"
                   >
-                    <Link href="https://share.google/AoGWHRD38lmKDHIZ3" target="_blank" rel="noopener noreferrer">
+                    <Link href={externalLinks.location} target="_blank" rel="noopener noreferrer">
                       <MapPin className="w-4 h-4 mr-2" />
                       Get Directions
                     </Link>
