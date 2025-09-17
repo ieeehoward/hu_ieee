@@ -1,13 +1,13 @@
 import { Carousel, CarouselItem } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { instructorServiceServer } from "@/lib/database-server"
+import { buildTimeDatabase } from "@/lib/database-build"
 import { Mail, GraduationCap } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 export async function CourseInstructorsCarousel() {
-  const instructors = await instructorServiceServer.getAll()
+  const instructors = await buildTimeDatabase.getAllInstructors()
   return (
     <div className="w-full">
       <Carousel autoPlay autoPlayInterval={5000} className="w-full">

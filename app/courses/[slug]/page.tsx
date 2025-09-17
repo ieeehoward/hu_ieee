@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { courseServiceServer } from "@/lib/database-server"
+import { buildTimeDatabase } from "@/lib/database-build"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -272,7 +273,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 // Generate static params for all courses
 export async function generateStaticParams() {
-  const courses = await courseServiceServer.getAll()
+  const courses = await buildTimeDatabase.getAllCourses()
   return courses.map((course) => ({
     slug: course.slug,
   }))
@@ -280,7 +281,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for each course
 export async function generateMetadata({ params }: CoursePageProps) {
-  const course = await courseServiceServer.getBySlug(params.slug)
+  const course = await buildTimeDatabase.getCourseBySlug(params.slug)
 
   if (!course) {
     return {
