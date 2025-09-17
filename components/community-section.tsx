@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { socialLinks } from "@/constants/static"
 import { MessageCircle, UserPlus, Instagram, Linkedin, Mail, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import { externalLinks, socialLinks } from "@/constants/static"
 
 const iconMap = {
   instagram: Instagram,
@@ -34,7 +34,7 @@ export function CommunitySection() {
                 peers.
               </p>
               <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
-                <Link href="https://groupme.com/join_group/placeholder" target="_blank" rel="noopener noreferrer">
+                <Link href={externalLinks.groupme} target="_blank" rel="noopener noreferrer">
                   Join GroupMe Chat
                   <MessageCircle className="ml-2 w-4 h-4" />
                 </Link>
@@ -50,7 +50,7 @@ export function CommunitySection() {
                 Become an official IEEE member and unlock exclusive benefits, resources, and networking opportunities.
               </p>
               <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
-                <Link href="https://forms.google.com/placeholder" target="_blank" rel="noopener noreferrer">
+                <Link href={externalLinks.registrationForm} target="_blank" rel="noopener noreferrer">
                   Sign Up Now
                   <UserPlus className="ml-2 w-4 h-4" />
                 </Link>

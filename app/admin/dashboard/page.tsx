@@ -20,15 +20,16 @@ import {
   Plus,
   Edit,
   Trash2,
-  Eye
+  Eye,
+  Settings2
 } from "lucide-react"
-import type { Course, TeamMember, Project, Instructor } from "@/types"
+import type { Course, TeamMember, Project, Instructor, CourseDetails } from "@/types"
 import { ProtectedRoute } from "@/components/admin/protected-route"
 import { CourseForm } from "@/components/admin/course-form"
 import { TeamForm } from "@/components/admin/team-form"
 import { ProjectForm } from "@/components/admin/project-form"
 import { InstructorForm } from "@/components/admin/instructor-form"
-import { courseService, teamMemberService, projectService, instructorService } from "@/lib/database"
+import { courseService, teamMemberService, projectService, instructorService, courseDetailsService } from "@/lib/database"
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -39,6 +40,7 @@ export default function AdminDashboard() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [instructors, setInstructors] = useState<Instructor[]>([])
+  const [courseDetails, setCourseDetails] = useState<CourseDetails[]>([])
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const { signOut } = useAuth()
@@ -59,6 +61,15 @@ export default function AdminDashboard() {
         setTeamMembers(teamData)
         setProjects(projectsData)
         setInstructors(instructorsData)
+        
+        // Fetch course details for each course
+        const courseDetailsData = await Promise.all(
+          coursesData.map(async (course) => {
+            const details = await courseDetailsService.getByCourseId(course.id)
+            return details
+          })
+        )
+        setCourseDetails(courseDetailsData.filter(Boolean) as CourseDetails[])
       } catch (error) {
         console.error('Error fetching data:', error)
       } finally {
@@ -408,10 +419,13 @@ export default function AdminDashboard() {
                              <Badge variant={course.status === "current" ? "default" : "secondary"} className={course.status === "current" ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-gray-100 text-gray-600 border-gray-200"}>
                              {course.status}
                              </Badge>
-                             <Button size="sm" variant="outline" onClick={() => handleEdit("course", course)} className="hover:bg-blue-50 hover:border-blue-200">
+                             <Button size="sm" variant="outline" onClick={() => router.push(`/admin/courses/${course.id}`)} className="hover:bg-purple-50 hover:border-purple-200" title="Manage Course Details">
+                             <Settings2 className="h-4 w-4" />
+                             </Button>
+                             <Button size="sm" variant="outline" onClick={() => handleEdit("course", course)} className="hover:bg-blue-50 hover:border-blue-200" title="Edit Course">
                              <Edit className="h-4 w-4" />
                              </Button>
-                             <Button size="sm" variant="outline" className="hover:bg-gray-50 hover:border-gray-200">
+                             <Button size="sm" variant="outline" onClick={() => router.push(`/courses/${course.slug}`)} className="hover:bg-gray-50 hover:border-gray-200" title="View Public Page">
                              <Eye className="h-4 w-4" />
                              </Button>
                              <AlertDialog>
